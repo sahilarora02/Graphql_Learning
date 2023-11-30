@@ -24,14 +24,32 @@ const typeDefs = gql`
     movies: [Movie!]!
     movie(name: String!): Movie!
   }
-  enum Nationality {
-    CANADA
-    BRAZIL
-    INDIA
-    GERMANY
-    CHILE
-    UKRAINE
-  }
+
+   input CreateUserInput {
+    name: String!
+    username: String!
+    age: Int!
+    nationality: Nationality = INDIA
+   }
+   input UpdateUserNameInput {
+   id: ID!
+   newUsername: String!
+   }
+
+   type Mutation {
+      createUser(input: CreateUserInput!): User
+       updateUsername(input: UpdateUserNameInput):User
+   }
+   
+
+    enum Nationality {
+      CANADA
+      BRAZIL
+      INDIA
+      GERMANY
+      CHILE
+      UKRAINE
+    }
 `;
 
 module.exports = { typeDefs };

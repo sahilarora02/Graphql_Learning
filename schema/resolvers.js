@@ -33,6 +33,32 @@ const resolvers = {
       );
     },
   },
+
+  Mutation: {
+ 
+    createUser: (parent ,args) => {
+     const user = args.input
+     console.log(user);
+     const lastId =UserList[UserList.length - 1].id;
+     user.id = lastId+1;
+     UserList.push(user);
+     return user;
+    }
+    ,
+    updateUsername: (parent ,args) => {
+     const { id , newUsername } = args.input
+     let userUpdate;
+     UserList.forEach((user) => {
+      if(user.id === id){
+        user.username = newUsername;
+        userUpdate = user;
+      }
+     });
+     return userUpdate;
+     }
+
+  }
+
 };
 
 module.exports = { resolvers };
